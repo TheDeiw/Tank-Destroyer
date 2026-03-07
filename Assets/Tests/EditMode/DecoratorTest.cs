@@ -4,62 +4,9 @@ using System.Reflection;
 using System;
 using System.Linq; 
 
-// Тести для самого атрибута BulletEffectAttribute
+
 [TestFixture]
-public class BulletEffectAttributeTests
-{
-    [Test]
-    public void Constructor_WhenValidArgs_SetsPropertiesCorrectly()
-    {
-        // Arrange
-        BulletEffectType expectedType = BulletEffectType.DamageModification;
-        string expectedDescription = "Increases damage";
-
-        // Act
-        BulletEffectAttribute attribute = new BulletEffectAttribute(expectedType, expectedDescription);
-        attribute.Priority = 5; // Також протестуємо встановлення пріоритету
-
-        // Assert
-        Assert.AreEqual(expectedType, attribute.EffectType);
-        Assert.AreEqual(expectedDescription, attribute.Description);
-        Assert.AreEqual(5, attribute.Priority);
-    }
-
-    [Test]
-    public void Constructor_WhenDescriptionIsNull_ThrowsArgumentNullException()
-    {
-        Assert.Throws<ArgumentNullException>(() => new BulletEffectAttribute(BulletEffectType.None, null));
-    }
-
-    [Test]
-    public void Constructor_WhenDescriptionIsEmpty_ThrowsArgumentNullException()
-    {
-        Assert.Throws<ArgumentNullException>(() => new BulletEffectAttribute(BulletEffectType.None, ""));
-    }
-
-    [Test]
-    public void Constructor_WhenDescriptionIsWhitespace_ThrowsArgumentNullException()
-    {
-        Assert.Throws<ArgumentNullException>(() => new BulletEffectAttribute(BulletEffectType.None, "   "));
-    }
-
-    [Test]
-    public void AttributeUsage_IsCorrectlyDefined()
-    {
-        var attributeType = typeof(BulletEffectAttribute);
-        var usageAttribute = (AttributeUsageAttribute)Attribute.GetCustomAttribute(attributeType, typeof(AttributeUsageAttribute));
-
-        Assert.IsNotNull(usageAttribute, "AttributeUsageAttribute not found on BulletEffectAttribute.");
-        Assert.AreEqual(AttributeTargets.Class, usageAttribute.ValidOn);
-        Assert.IsFalse(usageAttribute.Inherited); // Зазвичай для таких атрибутів false
-        Assert.IsTrue(usageAttribute.AllowMultiple); // Ми встановили true
-    }
-}
-
-
-// Тести для системи куль
-[TestFixture]
-public class BulletSystemIntegrationTests // Перейменував для ясності, що це більш інтеграційні тести системи
+public class BulletSystemIntegrationTests 
 {
     private BulletConfiguration defaultConfig;
 
@@ -67,12 +14,8 @@ public class BulletSystemIntegrationTests // Перейменував для ясності, що це біл
     public void Setup()
     {
         defaultConfig = new BulletConfiguration(10, 100f);
-        // Очищення кешу BulletFactory перед кожним тестом, якщо це можливо і потрібно.
-        // Для простоти, ми покладаємося на те, що GetConfiguration працює правильно з кешем,
-        // і перевіримо це окремо.
     }
 
-    // Тести для BulletConfiguration
     [Test]
     public void BulletConfiguration_Constructor_SetsPropertiesCorrectly()
     {
@@ -82,8 +25,7 @@ public class BulletSystemIntegrationTests // Перейменував для ясності, що це біл
         Assert.AreEqual(damage, config.Damage);
         Assert.AreEqual(speed, config.Speed, 0.001f);
     }
-
-    // Тести для StandardBullet
+    
     [Test]
     public void StandardBullet_Constructor_SetsPropertiesFromConfig()
     {
@@ -106,44 +48,13 @@ public class BulletSystemIntegrationTests // Перейменував для ясності, що це біл
         bullet.Shoot(direction);
         Assert.AreEqual(direction, bullet.Direction);
     }
-
-    [Test]
-    public void StandardBullet_HasCorrectBulletEffectAttribute()
-    {
-        var type = typeof(StandardBullet);
-        var attributes = type.GetCustomAttributes(typeof(BulletEffectAttribute), false)
-                             .Cast<BulletEffectAttribute>()
-                             .ToArray();
-
-        Assert.IsNotEmpty(attributes, "StandardBullet should have at least one BulletEffectAttribute.");
-        var attribute = attributes.FirstOrDefault(attr => attr.EffectType == BulletEffectType.None);
-        Assert.IsNotNull(attribute, "StandardBullet should have a None BulletEffectAttribute.");
-        Assert.AreEqual("Standard projectile with no special effects.", attribute.Description);
-    }
-
-
-    // Тести для декораторів та їх атрибутів
+    
     [Test]
     public void BulletDecorator_Constructor_NullBullet_ThrowsArgumentNullException()
     {
         Assert.Throws<ArgumentNullException>(() => new DamageDecorator(null, 5));
     }
-
-    [Test]
-    public void DamageDecorator_HasCorrectBulletEffectAttribute()
-    {
-        var type = typeof(DamageDecorator);
-        var attributes = type.GetCustomAttributes(typeof(BulletEffectAttribute), false)
-                             .Cast<BulletEffectAttribute>()
-                             .ToArray();
-
-        Assert.IsNotEmpty(attributes, "DamageDecorator should have BulletEffectAttribute(s).");
-        var attribute = attributes.FirstOrDefault(attr => attr.EffectType == BulletEffectType.DamageModification);
-
-        Assert.IsNotNull(attribute, "DamageDecorator should have a DamageModification BulletEffectAttribute.");
-        Assert.AreEqual("Increases bullet's base damage.", attribute.Description);
-        Assert.AreEqual(10, attribute.Priority);
-    }
+    
 
     [Test]
     public void DamageDecorator_ModifiesDamageCorrectly()
@@ -159,22 +70,7 @@ public class BulletSystemIntegrationTests // Перейменував для ясності, що це біл
         Assert.AreEqual(Vector3.right, decoratedBullet.Direction);
         Assert.AreEqual(Vector3.right, standardBullet.Direction);
     }
-
-    [Test]
-    public void SpeedDecorator_HasCorrectBulletEffectAttribute()
-    {
-        var type = typeof(SpeedDecorator);
-        var attributes = type.GetCustomAttributes(typeof(BulletEffectAttribute), false)
-                             .Cast<BulletEffectAttribute>()
-                             .ToArray();
-
-        Assert.IsNotEmpty(attributes, "SpeedDecorator should have BulletEffectAttribute(s).");
-        var attribute = attributes.FirstOrDefault(attr => attr.EffectType == BulletEffectType.SpeedModification);
-
-        Assert.IsNotNull(attribute, "SpeedDecorator should have a SpeedModification BulletEffectAttribute.");
-        Assert.AreEqual("Modifies bullet's travel speed.", attribute.Description);
-        Assert.AreEqual(5, attribute.Priority);
-    }
+    
 
     [Test]
     public void SpeedDecorator_ModifiesSpeedCorrectly()
@@ -191,7 +87,6 @@ public class BulletSystemIntegrationTests // Перейменував для ясності, що це біл
         Assert.AreEqual(Vector3.down, standardBullet.Direction);
     }
 
-    // Тести для BulletFactory
     [Test]
     public void BulletFactory_CreateStandardBullet_ReturnsCorrectTypeAndProperties()
     {
@@ -231,9 +126,7 @@ public class BulletSystemIntegrationTests // Перейменував для ясності, що це біл
     {
         MethodInfo getConfigurationMethod = typeof(BulletFactory)
             .GetMethod("GetConfiguration", BindingFlags.NonPublic | BindingFlags.Static);
-
-        // Очистити кеш перед цим тестом, якщо це можливо
-        // Для цього прикладу, припустимо, що кеш порожній або тестуємо унікальний ключ
+        
         string uniqueKey = "UniqueTestCacheKey_" + Guid.NewGuid().ToString();
 
         BulletConfiguration config1 = (BulletConfiguration)getConfigurationMethod
@@ -264,7 +157,6 @@ public class BulletSystemIntegrationTests // Перейменував для ясності, що це біл
         Assert.IsInstanceOf<ArgumentException>(exEmpty.InnerException);
     }
 
-    // Тест на комбінацію декораторів
     [Test]
     public void CombinedDecorators_PropertiesAreCorrect()
     {

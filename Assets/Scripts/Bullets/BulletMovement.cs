@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletMovement : MonoBehaviour
 {
-    private IBullet bullet;
+    private BulletData bullet;
 
-    public void SetBullet(IBullet bullet)
+    public void SetBullet(BulletData bullet)
     {
         this.bullet = bullet;
     }
 
-    public void SetDirection(Vector3 dir)
+    public void SetDirection(Vector3 direction)
     {
-        bullet.Shoot(dir);
+        bullet.SetDirection(direction);
     }
 
     void Update()
@@ -26,7 +24,6 @@ public class BulletMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);
-            Debug.Log("Bullet destroyed by wall");
         }
     }
 }

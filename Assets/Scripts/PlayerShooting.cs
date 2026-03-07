@@ -35,7 +35,7 @@ public class PlayerShooting : MonoBehaviour
     {
         Debug.Log("Shoot");
 
-        IBullet bullet = BulletFactory.CreateStandardBullet();
+        BulletData bullet = new BulletData(1, 20f);
 
         // IBullet bullet = BulletFactory.CreateEnhancedBullet();
         // IBullet bullet = BulletFactory.CreateFastBullet();

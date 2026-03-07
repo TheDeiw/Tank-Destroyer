@@ -41,11 +41,6 @@ public class BulletDetection : MonoBehaviour
                 healthBar.SetHealth(currentHealth);
             }
         }
-        //Destroy(other.gameObject);
-        //// Припустимо, що шкода залежить від типу кулі
-        //int damage = other.gameObject.GetComponent<IBullet>().Damage;
-        //GetComponent<PlayerHealth>().TakeDamage(damage); // Для гравця
-        //// Або для ворога: currentHealth -= damage;
     }
 }
 

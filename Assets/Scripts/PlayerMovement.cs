@@ -18,9 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     bool isGrounded;
-
-    public float baseSpeed = 12f;
-    private PlayerStateManager stateManager;
+    
 
     public Animator animator;
 
@@ -41,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Animation
         animator.SetFloat("Speed", direction.magnitude);
-        float currentSpeed = baseSpeed * (stateManager != null ? stateManager.GetCurrentSpeedMultiplier() : 1f);
 
         // If the player is moving
         if (direction.magnitude >= 0.1f)
