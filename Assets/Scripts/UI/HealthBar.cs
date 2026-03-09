@@ -5,16 +5,13 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider slider;
-    public Gradient gradient;
-    public Image fill;
-
-    public AudioSource explosionSound;
+    [SerializeField] private Slider slider;
+    [SerializeField] private Gradient gradient;
+    [SerializeField] private Image fill;
+    
     public void SetHealth(int health)
     {
-        explosionSound.Play();
         slider.value = health;
-
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 
@@ -22,7 +19,6 @@ public class HealthBar : MonoBehaviour
     {
         slider.maxValue = health;
         slider.value = health;
-
         fill.color = gradient.Evaluate(1f);
     }
 }

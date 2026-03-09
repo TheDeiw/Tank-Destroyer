@@ -11,6 +11,9 @@ public class BulletDetection : MonoBehaviour
     public HealthBar healthBar;
 
     public ParticleSystem explosionEffect;
+    [SerializeField] private AudioSource hitSound;
+    
+    private bool isDead = false;
 
     void Start()
     {
@@ -22,11 +25,11 @@ public class BulletDetection : MonoBehaviour
     }
     void Update()
     {
-        if (currentHealth <= 0)
+        if (!isDead && currentHealth <= 0)
         {
+            isDead = true;
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
-            Debug.Log("Enemy destroyed by bullet");
         }
     }
 

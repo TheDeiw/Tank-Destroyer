@@ -1,14 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
+using Enemy;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public GameObject player;
-    //public GameObject[] enemyPrefabs;
     [SerializeField] private PrefabProvider prefabProvider;
-    private EnemyFactory[] enemyFactories;
+    private IEnemyFactory[] enemyFactories;
     public float minSpawnRadius;
     public float maxSpawnRadius;
 
@@ -25,14 +24,14 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            Instantiate(gameObject);
         }
         else
         {
             Destroy(gameObject);
+            return;
         }
 
-        enemyFactories = new EnemyFactory[]
+        enemyFactories = new IEnemyFactory[]
         {
             new EasyEnemyFactory(prefabProvider),
             new HardEnemyFactory(prefabProvider)
@@ -74,7 +73,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-
+        Debug.Log("Attempting to spawn enemy...");
         int attempts = 10;
         for (int i = 0; i < attempts; i++)
         {
@@ -89,6 +88,7 @@ public class GameManager : MonoBehaviour
                 GameObject enemy = enemyFactories[factoryIndex].CreateEnemy();
                 enemy.transform.position = spawnPosition;
                 enemy.transform.rotation = Quaternion.identity;
+                //Instantiate(enemy, spawnPosition, Quaternion.identity);
                 Debug.Log($"Enemy spawned at {spawnPosition} using {enemyFactories[factoryIndex].GetType().Name}");
                 break;
             }

@@ -1,34 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyLogic : MonoBehaviour
+namespace Enemy
 {
-    private Transform target;
-    public float speed;
-    public IEnemyBehaviorStrategy behaviorStrategy;
-
-    private bool isDead = false;
-
-    void Start()
+    public class EnemyLogic : MonoBehaviour
     {
-        target = GameObject.FindGameObjectWithTag("Player")?.transform;
-        //if (behaviorStrategy == null)
-        //{
-        //    SetBehaviorStrategy(new ChasePlayerStrategy());
-        //}
-    }
+        private Transform target;
+        public float speed;
+        public IEnemyBehaviorStrategy behaviorStrategy;
 
-    //public void SetBehaviorStrategy(IEnemyBehaviorStrategy newStrategy)
-    //{
-    //    this.behaviorStrategy = newStrategy;
-    //}
+        private bool isDead = false;
 
-    void Update()
-    {
-        if (target != null && behaviorStrategy != null && !isDead)
+        void Start()
         {
-            behaviorStrategy.Execute(transform, target, speed, this);
+            target = GameObject.FindGameObjectWithTag("Player")?.transform;
+        }
+
+        void Update()
+        {
+            if (target != null && behaviorStrategy != null && !isDead)
+            {
+                behaviorStrategy.Execute(transform, target, speed, this);
+            }
         }
     }
 }

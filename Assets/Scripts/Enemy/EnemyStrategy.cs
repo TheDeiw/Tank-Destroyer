@@ -1,33 +1,35 @@
-using System;
 using UnityEngine;
 
-public interface IEnemyBehaviorStrategy
+namespace Enemy
 {
-    void Execute(Transform enemyTransform, Transform playerTransform, float speed, EnemyLogic enemyLogic);
-}
-
-public class ChasePlayerStrategy : IEnemyBehaviorStrategy
-{
-    public void Execute(Transform enemyTransform, Transform playerTransform, float speed, EnemyLogic enemyLogic)
+    public interface IEnemyBehaviorStrategy
     {
-        if (playerTransform != null)
+        void Execute(Transform enemyTransform, Transform playerTransform, float speed, EnemyLogic enemyLogic);
+    }
+
+    public class ChasePlayerStrategy : IEnemyBehaviorStrategy
+    {
+        public void Execute(Transform enemyTransform, Transform playerTransform, float speed, EnemyLogic enemyLogic)
         {
-            enemyTransform.LookAt(playerTransform);
-            Vector3 direction = (playerTransform.position - enemyTransform.position).normalized;
-            enemyTransform.position += direction * speed * Time.deltaTime;
+            if (playerTransform)
+            {
+                enemyTransform.LookAt(playerTransform);
+                Vector3 direction = (playerTransform.position - enemyTransform.position).normalized;
+                enemyTransform.position += direction * (speed * Time.deltaTime);
+            }
         }
     }
-}
 
-public class EvadeStrategy : IEnemyBehaviorStrategy
-{
-    public void Execute(Transform enemyTransform, Transform playerTransform, float speed, EnemyLogic enemyLogic)
+    public class EvadeStrategy : IEnemyBehaviorStrategy
     {
-        if (playerTransform != null)
+        public void Execute(Transform enemyTransform, Transform playerTransform, float speed, EnemyLogic enemyLogic)
         {
-            Vector3 directionAwayFromPlayer = (enemyTransform.position - playerTransform.position).normalized;
-            enemyTransform.LookAt(playerTransform);
-            enemyTransform.position += directionAwayFromPlayer * speed * Time.deltaTime;
+            if (playerTransform)
+            {
+                Vector3 directionAwayFromPlayer = (enemyTransform.position - playerTransform.position).normalized;
+                enemyTransform.LookAt(playerTransform);
+                enemyTransform.position += directionAwayFromPlayer * (speed * Time.deltaTime);
+            }
         }
     }
 }
