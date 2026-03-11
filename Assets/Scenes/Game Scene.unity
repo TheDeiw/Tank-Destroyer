@@ -1366,6 +1366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 871078407}
   - component: {fileID: 871078406}
+  - component: {fileID: 871078408}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1387,8 +1388,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::GameManager
   player: {fileID: 1764076057}
   prefabProvider: {fileID: 1403065147}
-  minSpawnRadius: 25
-  maxSpawnRadius: 50
+  minSpawnRadius: 10
+  maxSpawnRadius: 30
 --- !u!4 &871078407
 Transform:
   m_ObjectHideFlags: 0
@@ -1404,6 +1405,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &871078408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871078405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d82d813d4f1b117438668b92997806df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::GameOverHandler
+  playerDeathHandler: {fileID: 1764076065}
+  losePanel: {fileID: 1263509567}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1608,7 +1623,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2589000205206243606, guid: 9e8b3edcb6186744aba887203c3c6873, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1764076065}
   m_SourcePrefab: {fileID: 100100000, guid: 9e8b3edcb6186744aba887203c3c6873, type: 3}
 --- !u!1 &1193671573
 GameObject:
@@ -2546,6 +2564,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2015320253675257924, guid: 9e8b3edcb6186744aba887203c3c6873, type: 3}
   m_PrefabInstance: {fileID: 1149425755}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1764076065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764076057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec497fd30c3e454ea5be69e88c94d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::PlayerDeathHandler
 --- !u!1 &1893592812
 GameObject:
   m_ObjectHideFlags: 0

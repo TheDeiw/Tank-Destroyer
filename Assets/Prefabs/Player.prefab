@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 6127598658526352518}
   - component: {fileID: 5312555014018418347}
   - component: {fileID: 7588859455098040922}
-  - component: {fileID: 1127269604692812023}
+  - component: {fileID: 6902777229616143419}
   - component: {fileID: 3704478701213700466}
   m_Layer: 0
   m_Name: Player
@@ -349,7 +349,7 @@ MonoBehaviour:
     m_Bits: 64
   animator: {fileID: 6973587552792460793}
   moveDirectionForGun: {x: 0, y: 0, z: 0}
---- !u!114 &1127269604692812023
+--- !u!114 &6902777229616143419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -358,12 +358,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2589000205206243606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b6cf947248bad44f8915642ced4f9b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 578750e5046ef3548a16dbee19b15c99, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 0
+  m_EditorClassIdentifier: Scripts::HealthComponent
+  maxHealth: 5
   healthBar: {fileID: 6916725977343876112}
-  explosionEffect: {fileID: 6736595870537854314, guid: 445f370c8b8e5864b81f388ae53f09ad, type: 3}
   hitSound: {fileID: 0}
 --- !u!95 &3704478701213700466
 Animator:

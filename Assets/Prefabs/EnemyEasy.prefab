@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 7718250401790143955}
   - component: {fileID: 8043813027665622739}
   - component: {fileID: -1232118968227294343}
-  - component: {fileID: 1823786960183636821}
+  - component: {fileID: 2917627160871556645}
+  - component: {fileID: 8107568884769860123}
   m_Layer: 0
   m_Name: EnemyEasy
   m_TagString: Enemy
@@ -74,10 +75,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5666372755743178093}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1000
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -107,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
---- !u!114 &1823786960183636821
+--- !u!114 &2917627160871556645
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,11 +117,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 5666372755743178093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b6cf947248bad44f8915642ced4f9b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 578750e5046ef3548a16dbee19b15c99, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Scripts::HealthComponent
   maxHealth: 1
   healthBar: {fileID: 0}
+  hitSound: {fileID: 0}
+--- !u!114 &8107568884769860123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5666372755743178093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8cb57521ba29e841b9c6e7e3aa1da58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::EnemyDeathHandler
   explosionEffect: {fileID: 6736595870537854314, guid: 445f370c8b8e5864b81f388ae53f09ad, type: 3}
 --- !u!1 &7191359297473507497
 GameObject:
@@ -166,7 +180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecfdd286500e1e408a7af0eb1339b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 20
   bulletPrefab: {fileID: 1243919747145198398, guid: 163aead5f2d236448b408f37a943ed77, type: 3}
 --- !u!1001 &8745334765413265523
 PrefabInstance:

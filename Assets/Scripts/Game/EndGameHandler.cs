@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class GameOverHandler : MonoBehaviour
 {
-    [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerDeathHandler playerDeathHandler;
     [SerializeField] private GameObject losePanel;
 
     void Start()
     {
         Time.timeScale = 1f;
         losePanel.SetActive(false);
-        playerHealth.OnPlayerDied += HandlePlayerDeath;
+        playerDeathHandler.OnPlayerDied += HandlePlayerDeath;
     }
 
     void OnDestroy()
     {
-        if (playerHealth != null)
-            playerHealth.OnPlayerDied -= HandlePlayerDeath;
+        if (playerDeathHandler != null)
+            playerDeathHandler.OnPlayerDied -= HandlePlayerDeath;
     }
 
     private void HandlePlayerDeath()
