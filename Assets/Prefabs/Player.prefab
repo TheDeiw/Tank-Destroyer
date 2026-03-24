@@ -232,7 +232,9 @@ GameObject:
   - component: {fileID: 5312555014018418347}
   - component: {fileID: 7588859455098040922}
   - component: {fileID: 6902777229616143419}
+  - component: {fileID: 4091907676390703998}
   - component: {fileID: 3704478701213700466}
+  - component: {fileID: 2528385283253532954}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -364,6 +366,18 @@ MonoBehaviour:
   maxHealth: 5
   healthBar: {fileID: 6916725977343876112}
   hitSound: {fileID: 0}
+--- !u!114 &4091907676390703998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2589000205206243606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec497fd30c3e454ea5be69e88c94d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::PlayerDeathHandler
 --- !u!95 &3704478701213700466
 Animator:
   serializedVersion: 7
@@ -386,6 +400,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2528385283253532954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2589000205206243606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec497fd30c3e454ea5be69e88c94d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::PlayerDeathHandler
 --- !u!1 &2683346870412318400
 GameObject:
   m_ObjectHideFlags: 0

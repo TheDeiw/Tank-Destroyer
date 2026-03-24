@@ -5,11 +5,9 @@ namespace Bullets
     public class Bullet : MonoBehaviour
     {
         [SerializeField] private int damage = 1;
-        [SerializeField] private float speed;
+        [SerializeField] private float speed = 15f;
         [SerializeField] private float lifetime = 5f;
         private Vector3 Direction { get; set; }
-
-        public int Damage => damage;
 
         void Start()
         {

@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
             minSpawnInterval = Mathf.Max(minIntervalLimit, minSpawnInterval * intervalDecreaseRate);
             maxSpawnInterval = Mathf.Max(minIntervalLimit, maxSpawnInterval * intervalDecreaseRate);
             timeSinceLastDecrease = 0f;
-            Debug.Log($"New spawn intervals: min={minSpawnInterval}, max={maxSpawnInterval}");
+            //Debug.Log($"New spawn intervals: min={minSpawnInterval}, max={maxSpawnInterval}");
         }
     }
 
@@ -69,11 +69,11 @@ public class GameManager : MonoBehaviour
     {
         if (enemyFactories == null || enemyFactories.Length == 0)
         {
-            Debug.LogError("No enemy factories initialized!");
+            //Debug.LogError("No enemy factories initialized!");
             return;
         }
 
-        Debug.Log("Attempting to spawn enemy...");
+        //Debug.Log("Attempting to spawn enemy...");
         int attempts = 10;
         for (int i = 0; i < attempts; i++)
         {
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
                 enemy.transform.position = spawnPosition;
                 enemy.transform.rotation = Quaternion.identity;
                 //Instantiate(enemy, spawnPosition, Quaternion.identity);
-                Debug.Log($"Enemy spawned at {spawnPosition} using {enemyFactories[factoryIndex].GetType().Name}");
+                //Debug.Log($"Enemy spawned at {spawnPosition} using {enemyFactories[factoryIndex].GetType().Name}");
                 break;
             }
         }

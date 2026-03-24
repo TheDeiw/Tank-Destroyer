@@ -12,8 +12,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
 
    public event Action OnDied;
    public event Action<int, int> OnHealthChanged;
-
-   public bool IsAlive => !isDead;
+   
    public int CurrentHealth => currentHealth;
    public int MaxHealth => maxHealth;
 
@@ -30,7 +29,10 @@ public class HealthComponent : MonoBehaviour, IDamageable
       currentHealth -= damage;
       currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-      hitSound?.Play();
+      if (hitSound != null) 
+      {
+         hitSound.Play();
+      }
       healthBar?.SetHealth(currentHealth);
       OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
