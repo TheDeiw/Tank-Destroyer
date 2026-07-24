@@ -6,7 +6,7 @@ namespace Bullets
     {
         [SerializeField] private int damage = 1;
         [SerializeField] private float speed = 15f;
-        [SerializeField] private float lifetime = 5f;
+        [SerializeField] private float lifetime = 10f;
         private Vector3 Direction { get; set; }
 
         void Start()

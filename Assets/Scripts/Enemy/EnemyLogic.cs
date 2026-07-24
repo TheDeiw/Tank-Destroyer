@@ -17,7 +17,7 @@ namespace Enemy
 
         void Update()
         {
-            if (target != null && behaviorStrategy != null && !isDead)
+            if (target && behaviorStrategy != null && !isDead)
             {
                 behaviorStrategy.Execute(transform, target, speed, this);
             }

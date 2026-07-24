@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    private static GameManager Instance { get; set; }
     public GameObject player;
     [SerializeField] private PrefabProvider prefabProvider;
     private IEnemyFactory[] enemyFactories;
-    public float minSpawnRadius;
-    public float maxSpawnRadius;
+    [SerializeField] private float minSpawnRadius;
+    [SerializeField] private float maxSpawnRadius;
 
-    private float minSpawnInterval = 1f;
-    private float maxSpawnInterval = 3f;
-    private float minIntervalLimit = 0.5f;
-    private float intervalDecreaseRate = 0.9f;
+    [SerializeField] private float minSpawnInterval = 1f;
+    [SerializeField] private float maxSpawnInterval = 3f;
+    [SerializeField] private float minIntervalLimit = 0.5f;
+    [SerializeField] private float intervalDecreaseRate = 0.9f;
+    [SerializeField] private float decreaseInterval = 5f;
     private float timeSinceLastDecrease = 0f;
-    private float decreaseInterval = 5f;
 
 
     void Awake()

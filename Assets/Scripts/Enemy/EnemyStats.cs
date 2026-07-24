@@ -14,7 +14,7 @@ namespace Enemy
         public static readonly Dictionary<EnemyDifficulty, float> SpeedByDifficulty = new Dictionary<EnemyDifficulty, float>
         {
             { EnemyDifficulty.Easy, 3f },
-            { EnemyDifficulty.Hard, 7f },
+            { EnemyDifficulty.Hard, 6f },
             { EnemyDifficulty.Default, 5f }
         };
     }

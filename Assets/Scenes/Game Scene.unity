@@ -1355,6 +1355,7 @@ GameObject:
   - component: {fileID: 871078407}
   - component: {fileID: 871078406}
   - component: {fileID: 871078408}
+  - component: {fileID: 871078409}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1378,6 +1379,11 @@ MonoBehaviour:
   prefabProvider: {fileID: 1403065147}
   minSpawnRadius: 10
   maxSpawnRadius: 30
+  minSpawnInterval: 1
+  maxSpawnInterval: 3
+  minIntervalLimit: 0.5
+  intervalDecreaseRate: 0.9
+  decreaseInterval: 5
 --- !u!4 &871078407
 Transform:
   m_ObjectHideFlags: 0
@@ -1407,6 +1413,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::GameOverHandler
   playerDeathHandler: {fileID: 1764076065}
   losePanel: {fileID: 1263509567}
+--- !u!114 &871078409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871078405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ff3d97525643bc8e6db3eadbc11577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::Terrain.ChunkGeneration
+  player: {fileID: 1764076064}
+  chunkPrefab: {fileID: 8044368043496390407, guid: b6eadb76d98a89c44b6f3ca615bc907f, type: 3}
+  chunkSize: 50
+  viewRadius: 2
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1600,6 +1622,10 @@ PrefabInstance:
       propertyPath: hitSound
       value: 
       objectReference: {fileID: 1699388034}
+    - target: {fileID: 6902777229616143419, guid: 9e8b3edcb6186744aba887203c3c6873, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7588859455098040922, guid: 9e8b3edcb6186744aba887203c3c6873, type: 3}
       propertyPath: cam
       value: 
@@ -2080,7 +2106,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &1475833081
 TerrainCollider:
   m_ObjectHideFlags: 0
