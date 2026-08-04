@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts::EnemyDeathHandler
   explosionEffect: {fileID: 6736595870537854314, guid: 445f370c8b8e5864b81f388ae53f09ad, type: 3}
+  deathSound: {fileID: 8300000, guid: 35c35d25e11629b4bb6d746546ec0014, type: 3}
 --- !u!1 &7191359297473507497
 GameObject:
   m_ObjectHideFlags: 0

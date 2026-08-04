@@ -4,6 +4,7 @@ public class EnemyDeathHandler : MonoBehaviour
 {
    [SerializeField] private ParticleSystem explosionEffect;
    private HealthComponent health;
+   [SerializeField] private AudioClip deathSound;
 
    void Awake()
    {
@@ -21,7 +22,13 @@ public class EnemyDeathHandler : MonoBehaviour
    {
       if (explosionEffect != null)
          Instantiate(explosionEffect, transform.position, Quaternion.identity);
-
+      if (deathSound != null)
+         AudioSource.PlayClipAtPoint(deathSound, transform.position);
       Destroy(gameObject);
+
+      if (GameManager.Instance != null)
+      {
+         GameManager.Instance.AddKill();
+      }
    }
 }

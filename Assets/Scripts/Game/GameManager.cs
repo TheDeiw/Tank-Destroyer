@@ -1,10 +1,11 @@
 using System.Collections;
 using Enemy;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager Instance { get; set; }
+    public static GameManager Instance { get; private set; }
     public GameObject player;
     [SerializeField] private PrefabProvider prefabProvider;
     private IEnemyFactory[] enemyFactories;
@@ -17,6 +18,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float intervalDecreaseRate = 0.9f;
     [SerializeField] private float decreaseInterval = 5f;
     private float timeSinceLastDecrease = 0f;
+
+
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
+    public int KillsCount { get; private set; } = 0;
+    public int HighScore { get; private set; } = 0;
+
+    private const string HighScoreKey = "HighScoreKills";
 
 
     void Awake()
@@ -36,6 +45,10 @@ public class GameManager : MonoBehaviour
             new EasyEnemyFactory(prefabProvider),
             new HardEnemyFactory(prefabProvider)
         };
+
+        HighScore = PlayerPrefs.GetInt(HighScoreKey, 0);
+        PlayerPrefs.SetInt(HighScoreKey, HighScore);
+        PlayerPrefs.Save();
     }
 
     void Start()
@@ -93,5 +106,17 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+    }
+    public void AddKill()
+    {
+        KillsCount++;
+        scoreText.text = $"Score: {KillsCount}";
+        if (KillsCount > HighScore)
+        {
+            HighScore = KillsCount;
+            PlayerPrefs.SetInt(HighScoreKey, HighScore);
+            PlayerPrefs.Save();
+        }
+        highScoreText.text = $"High Score: {HighScore}";
     }
 }

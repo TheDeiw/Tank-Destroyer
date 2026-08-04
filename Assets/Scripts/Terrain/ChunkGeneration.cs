@@ -7,27 +7,29 @@ namespace Terrain
 {
     public class ChunkGeneration : MonoBehaviour
     {
+        [Header("References")]
         [SerializeField] private Transform player;
         [SerializeField] private Chunk chunkPrefab;
+
+        [Header("Settings")]
         [SerializeField] private float chunkSize;
         [SerializeField] private int viewRadius;
 
         private Dictionary<Vector2Int, Chunk> activeChunks = new Dictionary<Vector2Int, Chunk>();
-
         private Vector2Int lastPlayerChunk;
-
         private ObjectPool<Chunk> chunkPool;
 
         void Start()
         {
+            int capacity = (viewRadius * 2 + 1) * (viewRadius * 2 + 1);
             chunkPool = new ObjectPool<Chunk>(
                 createFunc: CreateChunk,
                 actionOnGet: OnTakeChunkFromPool,
                 actionOnRelease: OnReturnChunkToPool,
                 actionOnDestroy: OnDestroyChunk,
                 collectionCheck: false,
-                defaultCapacity: 25,
-                maxSize: 50
+                defaultCapacity: capacity,
+                maxSize: capacity * 2
             );
 
             lastPlayerChunk = GetChunkCoordFromPosition(player.position);
@@ -108,7 +110,7 @@ namespace Terrain
                     Chunk newChunk = chunkPool.Get();
 
                     Vector3 worldPosition = new Vector3(chunkCoord.x * chunkSize, 0, chunkCoord.y * chunkSize);
-                    newChunk.Initialize(chunkCoord, worldPosition);
+                    newChunk.Initialize(chunkCoord, worldPosition, chunkSize);
 
                     activeChunks.Add(chunkCoord, newChunk);
                 }

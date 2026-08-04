@@ -126,3 +126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 107c160a9feb466bb48c46c93f9be391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::Terrain.Chunk
+  grassCount: 500
+  grassMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  grassMaterial: {fileID: 2100000, guid: 30ce361e35e809345aed185205131b58, type: 2}

@@ -6,6 +6,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
    [SerializeField] private int maxHealth = 100;
    [SerializeField] private HealthBar healthBar;
    [SerializeField] private AudioSource hitSound;
+   [SerializeField] private GameObject hitEffect;
 
    private int currentHealth;
    private bool isDead = false;
@@ -35,6 +36,9 @@ public class HealthComponent : MonoBehaviour, IDamageable
       }
       healthBar?.SetHealth(currentHealth);
       OnHealthChanged?.Invoke(currentHealth, maxHealth);
+
+      if (hitEffect != null)
+         Instantiate(hitEffect, transform.position, Quaternion.identity);
 
       if (currentHealth <= 0)
       {

@@ -6,19 +6,19 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public GameObject tankGun;
+    [SerializeField] private GameObject tankGun;
     private GameObject[] enemies;
-    public float rotationSpeed = 5f;
-    public PlayerMovement playerMovement;
+    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private PlayerMovement playerMovement;
     private Vector3 direction;
-    public GameObject bulletSpawner;
+    [SerializeField] private GameObject bulletSpawner;
 
-    public GameObject bulletPrefab;
-    public float fireRate = 0.5f;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float fireRate = 0.5f;
     private float nextFireTime;
 
     [SerializeField] private AudioSource shootSound;
-    public ParticleSystem muzzleEffect;
+    [SerializeField] private ParticleSystem muzzleEffect;
 
     void Update()
     {
@@ -42,6 +42,8 @@ public class PlayerShooting : MonoBehaviour
         GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawner.transform.position, rotation);
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         bullet.InitializeDirection(shootDirection);
+        Instantiate(muzzleEffect, bulletSpawner.transform.position, rotation);
+        shootSound.Play();
     }
 
     private GameObject FindTheClosest()
